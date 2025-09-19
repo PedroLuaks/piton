@@ -5,7 +5,7 @@ import os
 pygame.init()
 
 #Definindo o tamanho da tela
-WIDTH, HEGHT = 800, 600
+WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Janela Simples")
 
@@ -25,7 +25,9 @@ SPEED = 1 #pixels por movimento
 
 def centralize_image():
     global img_rect, WIDTH,HEIGHT
-    img_react.center = (WIDTH // 2, HEIGHT // 2)
+    img_rect.center = (WIDTH // 2, HEIGHT // 2)
+
+last_width, last_height = WIDTH, HEIGHT    
 
 #Loop prrincipal do jogo
 running = True
@@ -37,8 +39,8 @@ while running:
     current_width, current_heigth = screen.get_size()
 
 
-    if current_width != last_width or current_height != last_height:
-        WIDTH, HEIGHT = current_width, current_height
+    if current_width != last_width or current_heigth != last_height:
+        WIDTH, HEIGHT = current_width, current_heigth
         centralize_image()
         last_width, last_height = current_width, current_heigth
 
