@@ -1,73 +1,71 @@
 import pygame
-import os
+import os 
 
-# Inicializando o Pygame
+#inicializando o pygame
 pygame.init()
 
-# Definindo o tamanho da janela padrão
+#Definindo o tamanho da tela
 WIDTH, HEIGHT = 800, 600
-screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)  # Janela redimensionável
-pygame.display.set_caption("Mover Imagem com Setas")
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Janela Simples")
 
-# Definindo a cor de fundo
-BG_COLOR = (193, 0, 40)  # cor de fundo (um tom escuro)
+#definindo a cor de fundo
+BG_COLOR = (30, 30, 40) #cor de fundo (tom da imagem "RGB")
 
-# Carregar a imagem
-image_file = "player.png"  # Coloque o nome correto da sua imagem aqui
+#carregando imagem
+image_file = "pygame-main\player.png" #coloque o nome da imagem
 if os.path.exists(image_file):
-    img = pygame.image.load(image_file).convert_alpha()  # Carregar a imagem
-    img_rect = img.get_rect(center=(WIDTH // 2, HEIGHT // 2))  # Centraliza a imagem
+    img = pygame.image.load(image_file).convert_alpha() #carregar imagem
+    img_rect = img.get_rect(center=(WIDTH // 2, HEIGHT // 2)) #centralizar imagem
 else:
     print("Imagem não encontrada!")
 
-# Velocidade de movimento
-SPEED = 1  # pixels por movimento
+#velocidade de movimento
+SPEED = 1 #pixels por movimento
 
-# Função para centralizar a imagem conforme o tamanho da tela
 def centralize_image():
-    global img_rect, WIDTH, HEIGHT
-    img_rect.center = (WIDTH // 2, HEIGHT // 2)  # Centraliza a imagem no centro da tela
+    global img_rect, WIDTH,HEIGHT
+    img_rect.center = (WIDTH // 2, HEIGHT // 2)
 
-# Variáveis para controle de redimensionamento
-last_width, last_height = WIDTH, HEIGHT
+last_width, last_height = WIDTH, HEIGHT    
 
-# Loop principal do jogo
+#Loop prrincipal do jogo
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    # Verifica se o tamanho da janela foi alterado
-    current_width, current_height = screen.get_size()
+    current_width, current_heigth = screen.get_size()
 
-    # Se a janela foi redimensionada, centraliza a imagem
-    if current_width != last_width or current_height != last_height:
-        WIDTH, HEIGHT = current_width, current_height
-        centralize_image()  # Centraliza a imagem quando a janela mudar de tamanho
-        last_width, last_height = current_width, current_height
 
-    # Pega as teclas pressionadas
+    if current_width != last_width or current_heigth != last_height:
+        WIDTH, HEIGHT = current_width, current_heigth
+        centralize_image()
+        last_width, last_height = current_width, current_heigth
+
+
+    #pega as teclas precionadas
     keys = pygame.key.get_pressed()
 
-    # Movimentação da imagem
+    #movimentação da imagem
     if keys[pygame.K_LEFT]:
-        img_rect.x -= SPEED  # Move para a esquerda
-    if keys[pygame.K_RIGHT]:
-        img_rect.x += SPEED  # Move para a direita
-    if keys[pygame.K_UP]:
-        img_rect.y -= SPEED  # Move para cima
+        img_rect.x -= SPEED #move para a esquerda
+    if keys[pygame.K_RIGHT]: 
+        img_rect.x += SPEED #Move para a direita
+    if keys[pygame.K_UP]: 
+        img_rect.y -= SPEED #move para cima
     if keys[pygame.K_DOWN]:
-        img_rect.y += SPEED  # Move para baixo
+        img_rect.y += SPEED #move para baixo
 
-    # Preencher o fundo
+    #preecher o fundo
     screen.fill(BG_COLOR)
 
-    # Desenhar a imagem na tela
-    screen.blit(img, img_rect.topleft)
+    #desenhar a imagem na tela
+    screen.blit(img, img_rect.topflet)
 
-    # Atualizar a tela
+    #atualizando a tela
     pygame.display.flip()
 
-# Finalizar o Pygame
+#Finalizar pygame
 pygame.quit()
